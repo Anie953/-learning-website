@@ -2,6 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import SignupForm, LoginForm, ForgotPasswordForm
+def home(request):
+    return render(request, 'home.html')
+def navbar(request):
+    return render(request, 'navbar.html')
+def about(request):
+    return render(request, 'about.html')
 
 def signup_view(request):
     if request.method == 'POST':

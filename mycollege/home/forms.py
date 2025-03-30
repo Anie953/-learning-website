@@ -1,7 +1,18 @@
 from django import forms
-from .models import Student
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
+from django.contrib.auth.models import User
 
-class StudentSignupForm(forms.ModelForm):
+class SignupForm(UserCreationForm):
     class Meta:
-        model = Student
-        fields = ['name', 'email', 'course']
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+class LoginForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+
+class ForgotPasswordForm(PasswordResetForm):
+    class Meta:
+        model = User
+        fields = ['email']

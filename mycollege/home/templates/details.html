@@ -6,21 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Student Details</h2>
-<table border="1">
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Course</th>
-    </tr>
-    {% for student in students %}
-    <tr>
-        <td>{{ student.name }}</td>
-        <td>{{ student.email }}</td>
-        <td>{{ student.course }}</td>
-    </tr>
-    {% endfor %}
-</table>
-
+    <h2>Welcome, {{ request.user.username }}</h2>
+    <p>This is the details page.</p>
+   
+    
 </body>
 </html>

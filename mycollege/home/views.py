@@ -1,17 +1,42 @@
 from django.shortcuts import render, redirect
-from .forms import StudentSignupForm
-from .models import Student
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from .forms import SignupForm, LoginForm, ForgotPasswordForm
 
-def signup(request):
+def signup_view(request):
     if request.method == 'POST':
-        form = StudentSignupForm(request.POST)
+        form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('details')
+            return redirect('login')
     else:
-        form = StudentSignupForm()
+        form = SignupForm()
     return render(request, 'signup.html', {'form': form})
 
-def details(request):
-    students = Student.objects.all()
-    return render(request, 'details.html', {'students': students})
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                return redirect('details')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
+
+def forgot_password_view(request):
+    if request.method == 'POST':
+        form = ForgotPasswordForm(request.POST)
+        if form.is_valid():
+            form.save(request=request)
+            return redirect('login')
+    else:
+        form = ForgotPasswordForm()
+    return render(request, 'forgot_password.html', {'form': form})
+
+@login_required
+def details_view(request):
+    return render(request, 'details.html')

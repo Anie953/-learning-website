@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate of Achievement</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #504949;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .certificate-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .certificate {
+            background: white;
+            border: 10px solid #4b4b4b;
+            padding: 40px;
+            width: 800px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        .certificate h1 {
+            font-size: 48px;
+            color: #333;
+            margin: 0;
+        }
+        .certificate p {
+            font-size: 20px;
+            color: #444;
+        }
+        .signature {
+            margin-top: 50px;
+            font-size: 18px;
+            text-align: right;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        button {
+            margin-top: 20px;
+            font-size: 16px;
+            background: #27ce6c;
+            color: #fff6f6;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #1fae5b;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: none;
+            }
+            .certificate {
+                box-shadow: none;
+                border: none;
+                width: 100%;
+                margin: 0;
+                padding: 20px;
+            }
+            .footer, .signature, button {
+                display: none; /* Hide footer, signature, and button while printing */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <div class="certificate">
+            <h1>Congratulations, {{ user.username }}!</h1>
+            <p>You have successfully completed the quiz with 100%!</p>
+            <p>🎉 Certificate of Achievement 🎉</p>
+            <div class="signature">Signature: ___________________</div>
+            <div class="footer">Date: <span id="currentDate"></span></div>
+        </div>
+        <button onclick="window.print()">Print Certificate</button>
+    </div>
+
+    <script>
+        const dateElement = document.getElementById('currentDate');
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = today.toLocaleDateString('en-US', options);
+    </script>
+</body>
+</html>

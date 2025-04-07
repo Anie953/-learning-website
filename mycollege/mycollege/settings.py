@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,6 +80,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'USER': 'myuser',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',  # Make sure the DB is running on this host
+        'PORT': '5432',
     }
 }
 
@@ -119,8 +123,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'EMAIL_BACKEND = django.core.mail.backends.console.EmailBackend'
+
+EMAIL_HOST = 'smtp.example.com'  # Ensure this is correct
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'anielv2001@gmail.com'
+EMAIL_HOST_PASSWORD = '123'
+DEFAULT_FROM_EMAIL = 'no-reply@example.com'

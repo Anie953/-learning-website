@@ -1,0 +1,55 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block content %}
+{% include "navbar.html" %}
+<section>
+  <!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+
+  <!-- The slideshow/carousel -->
+  <div id="demo" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static "image/img1.jpg" %}" alt="college" class="d-block w-100">
+        <div class="carousel-caption">
+          <h3>Modern-college</h3>
+          
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'image/img2.jpg' %}" alt="library" class="d-block w-100">
+        <div class="carousel-caption">
+          <h3>Modern-library</h3>
+          
+        </div> 
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'image/img3.jpg' %}" alt="basket ball" class="d-block w-100">
+        <div class="carousel-caption">
+          <h3>Basketball</h3>
+          
+        </div>  
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+{% include "footbar.html" %}
+
+{% endblock %}
+
+

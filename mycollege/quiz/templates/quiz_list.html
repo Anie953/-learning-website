@@ -36,11 +36,11 @@
              
                     
                     <h2>Quizzes</h2>
-                    <ul>
+                    <ol>
                         {% for quiz in quizzes %}
-                            <li><a href="{% url 'quiz_detail' quiz.id %}">{{ quiz.title }} ({{ quiz.category.name }})</a></li>
+                            <li><a href="{% url 'quiz_detail' quiz.id %}"class="btn btn-dark w-100">{{ quiz.title }} ({{ quiz.category.name }})</a></li>
                         {% endfor %}
-                    </ul>
+                    </ol>
                     
 
 </div>

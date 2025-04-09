@@ -4,7 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from .forms import SignupForm, LoginForm, ForgotPasswordForm
-
+from .forms import ContactForm
+from django.core.mail import send_mail
+from django.conf import settings
 # Home View
 def home(request):
     return render(request, 'home.html')
@@ -113,3 +115,22 @@ def forgot_password_view(request):
 @login_required
 def details_view(request):    
     return render(request, 'details.html')
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            
+            # Send email (adjust settings accordingly)
+            send_mail(
+                f'Contact Us Form Submission from {name}',
+                message,
+                email,
+                [settings.EMAIL_HOST_USER],
+            )
+            return render(request, 'success.html')
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})

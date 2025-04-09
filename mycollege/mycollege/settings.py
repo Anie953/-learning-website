@@ -57,7 +57,7 @@ ROOT_URLCONF = 'mycollege.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'mycollege.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'mydatabase',
         'USER': 'myuser',
-        'PASSWORD': '12345',
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': 'localhost',  # Make sure the DB is running on this host
         'PORT': '5432',
     }
@@ -130,11 +130,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'EMAIL_BACKEND = django.core.mail.backends.console.EmailBackend'
-
-EMAIL_HOST = 'smtp.example.com'  # Ensure this is correct
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'anielv2001@gmail.com'
-EMAIL_HOST_PASSWORD = '123'
-DEFAULT_FROM_EMAIL = 'no-reply@example.com'
+EMAIL_HOST_PASSWORD =os.getenv('EMAIL_HOST_PASSWORD')

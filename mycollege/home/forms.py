@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-
+from django import forms
 # Custom Signup Form with Registration Number
 class SignupForm(UserCreationForm):
     username = forms.CharField(
@@ -123,3 +123,8 @@ class ForgotPasswordForm(PasswordResetForm):
             raise ValidationError("Please enter either your email or candidate code.")
 
         return cleaned_data
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100, required=True)
+    email = forms.EmailField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)
